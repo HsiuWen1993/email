@@ -8,9 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.wen.base.data.HeaderModel;
 import com.wen.base.exception.BusinessExcetion;
@@ -18,7 +19,8 @@ import com.wen.base.exception.MessageCode;
 import com.wen.email.data.EmailResponse;
 import com.wen.email.service.EmailService;
 
-@Controller
+@RestController
+@RequestMapping("/api")
 public class EmailController {
 
 	private static final Logger log = LoggerFactory.getLogger(EmailController.class);
@@ -26,12 +28,12 @@ public class EmailController {
 	@Autowired
 	private EmailService emailService;
 
-	@PostMapping(value = "/sendMail")
+	@PostMapping(value = "/sendMailWithLogo")
 	public ResponseEntity<?> sendMail(@RequestBody Map<String, Object> body) {
 		EmailResponse response = new EmailResponse();
 		HeaderModel header = response.getHeaderModel();
 		try {
-			emailService.sendMail(
+			emailService.sendMailWithLogo(
 					MapUtils.getString(body, "FROM", ""),
 					MapUtils.getString(body, "PERSONAL", ""),
 					MapUtils.getString(body, "TO", ""), 

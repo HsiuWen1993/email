@@ -34,7 +34,7 @@ public class EmailService {
 	@Autowired
 	private Environment environment;
 
-	public void sendMail(String from, String personal, String to, String subject, String content)
+	public void sendMailWithLogo(String from, String personal, String to, String subject, String content)
 			throws MessagingException, IOException, TemplateException {
 
 		// CHECK PARAMETERS
